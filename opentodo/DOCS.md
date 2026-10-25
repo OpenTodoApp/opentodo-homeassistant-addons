@@ -6,7 +6,7 @@ OpenTodo is an open-source, local-first task manager. This add-on runs the OpenT
 
 1. Install the add-on and start it. Leave the options as they are for now.
 2. Click **Open Web UI**. It opens OpenTodo on port 8080 of your Home Assistant machine, for example `http://homeassistant.local:8080`.
-3. The first person to open it creates the owner account, so do it right away. After that, sign-up is closed and the owner invites people from **Settings → Members**.
+3. The first person to open it creates the owner account, so do it right away. After that, sign-up is closed and the owner invites people from **Settings → People**. Opened from outside your local network, the setup screen asks for a one-time setup code, printed on the add-on's **Log** tab.
 
 OpenTodo opens in its own browser tab, not in the Home Assistant sidebar: it has its own accounts and works as an app on your devices, which a page inside Home Assistant cannot do (see "Why not in the sidebar" below).
 
@@ -48,7 +48,7 @@ Home Assistant's sidebar panels (Ingress) show an add-on under a changing addres
 
 OpenTodo keeps its database, attachments and secrets in the add-on's own folder (`/data` inside the add-on). Home Assistant's backups include it when the OpenTodo add-on is selected; the add-on stops for a moment while it is backed up, so the copy of the database is consistent. Restoring that backup brings back every account and task. Uninstalling the add-on deletes the folder, so take a backup first.
 
-OpenTodo also has its own backups (**Settings → Backups**: scheduled snapshots, downloadable archives, copies to S3 or WebDAV) and export, if you want copies outside Home Assistant.
+OpenTodo also has its own backups (**Settings → Server**: scheduled snapshots, downloadable archives, copies to S3 or WebDAV) and export, if you want copies outside Home Assistant.
 
 ## Updates
 

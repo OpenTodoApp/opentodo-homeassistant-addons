@@ -23,6 +23,7 @@ jobs:
           path: ./opentodo
       - name: ShellCheck
         run: shellcheck -s bash opentodo/run.sh scripts/bump.sh
+          shellcheck scripts/check-public-image.sh
 
   smoke:
     name: Start the add-on

@@ -2,6 +2,8 @@
 # publishes ghcr.io/opentodoapp/opentodo-homeassistant:<version> (per-architecture images plus one
 # multi-arch image). A version is published once: skip-existing leaves an existing tag alone,
 # so a change to main without a new version only checks that the image still builds.
+# After publishing, the image must be pullable without signing in (as the Supervisor pulls
+# it): a package left private fails the run, and Follow OpenTodo then offers no update.
 name: Build
 
 on:
@@ -127,3 +129,22 @@ jobs:
             latest
           registry-prefix: ${{ needs.prepare.outputs.registry_prefix }}
           skip-existing: ${{ needs.prepare.outputs.version }}
+
+  public:
+    name: The image can be pulled without signing in
+    needs: [prepare, manifest]
+    if: needs.prepare.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+          persist-credentials: false
+
+      - name: Anonymous token and manifest for the new tag
+        env:
+          PREFIX: ${{ needs.prepare.outputs.registry_prefix }}
+          NAME: ${{ needs.prepare.outputs.image_name }}
+          VERSION: ${{ needs.prepare.outputs.version }}
+        run: scripts/check-public-image.sh "${PREFIX#ghcr.io/}/${NAME}" "${VERSION}"

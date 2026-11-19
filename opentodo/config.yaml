@@ -22,3 +22,6 @@ schema:
   allow_signup: bool
   trusted_proxies: str?
   log_level: list(debug|info|warn|error)
+# AppArmor does not allow access to /var/tmp
+environment:
+  SQLITE_TMPDIR: /tmp

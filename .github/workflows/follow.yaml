@@ -7,7 +7,7 @@ name: Follow OpenTodo
 
 on:
   schedule:
-    - cron: "17 5 * * *"
+    - cron: "17 * * * *"
   workflow_dispatch:
 
 permissions:

@@ -1,4 +1,4 @@
-# Follows OpenTodo's releases. Every day (or by hand) it compares the latest OpenTodo release
+# Follows OpenTodo's releases. Every hour (or by hand) it compares the latest OpenTodo release
 # with the version in the Dockerfile. When there is a newer one it runs scripts/bump.sh on a
 # branch, builds and publishes the images from that branch, and only then moves main to it,
 # so Home Assistant never offers an update whose image is missing. Release candidates are
